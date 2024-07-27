@@ -8,7 +8,8 @@
     "GuiMixin",
     "LiquidBlockRendererMixin",
     "MinecraftMixin",
-    "TooltipRenderUtilMixin"
+    "TooltipRenderUtilMixin",
+    "DefaultTooltipPositionerMixin"
   ],
   "mixins": [
     "ItemStackMixin"

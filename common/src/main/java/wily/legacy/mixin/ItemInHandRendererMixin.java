@@ -8,11 +8,13 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
+import org.joml.Quaternionf;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemInHandRenderer.class)
@@ -27,4 +29,6 @@ public class ItemInHandRendererMixin {
         float d =  (screenWidth - screenHeight * 16f/9f) / screenWidth;
         if (d != 0) poseStack.translate( (humanoidArm == HumanoidArm.RIGHT ? 1 : -1) * d / 4,0,d / 4);
     }
+    @Redirect(method = "renderHandsWithItems", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;mulPose(Lorg/joml/Quaternionf;)V"))
+    private void disableArmSway(PoseStack instance, Quaternionf quaternion) {}
 }

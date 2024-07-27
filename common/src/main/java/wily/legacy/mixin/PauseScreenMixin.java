@@ -80,7 +80,7 @@ public class PauseScreenMixin extends Screen implements ControlTooltip.Event{
     @Inject(method = "init",at = @At("HEAD"), cancellable = true)
     public void init(CallbackInfo ci) {
         ci.cancel();
-        renderableVList.init(this,width / 2 - 112,this.height / 3 + 10,225,0);
+        renderableVList.init(this,width / 2 - 100,this.height / 3 + 10,200,0);
         if (minecraft.level != null && minecraft.hasSingleplayerServer()) setAutoSave(ScreenUtil.getLegacyOptions().autoSaveInterval().get(),(Button)renderableVList.renderables.get(4));
     }
 }

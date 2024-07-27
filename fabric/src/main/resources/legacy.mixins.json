@@ -9,7 +9,8 @@
     "GuiMixin",
     "LiquidBlockRendererMixin",
     "PresetEditorMixin",
-    "TooltipRenderUtilMixin"
+    "TooltipRenderUtilMixin",
+    "DefaultTooltipPositionerMixin"
   ],
   "mixins": [
     "CustomIngredientImplMixin",

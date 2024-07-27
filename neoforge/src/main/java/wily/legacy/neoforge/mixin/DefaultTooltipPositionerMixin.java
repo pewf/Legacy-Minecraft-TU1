@@ -1,8 +1,8 @@
-package wily.legacy.forge.mixin;
+package wily.legacy.neoforge.mixin;
 
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import org.joml.Vector2i;
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 

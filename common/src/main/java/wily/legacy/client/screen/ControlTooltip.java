@@ -358,7 +358,7 @@ public interface ControlTooltip {
     class GuiManager implements PreparableReloadListener {
         public static final List<ControlTooltip> controlTooltips = new ArrayList<>();
         public static void applyGUIControlTooltips(Renderer renderer, Minecraft minecraft){
-            renderer.add((LegacyKeyMapping) minecraft.options.keyJump,()-> minecraft.player.isUnderWater() ? getAction("legacy.action.swim_up") : null).add((LegacyKeyMapping) Minecraft.getInstance().options.keyInventory).add((LegacyKeyMapping) Legacy4JClient.keyCrafting).add((LegacyKeyMapping) Minecraft.getInstance().options.keyUse,()-> getActualUse(minecraft)).add((LegacyKeyMapping) Minecraft.getInstance().options.keyAttack,()->getMainAction(minecraft));
+            renderer.add((LegacyKeyMapping) minecraft.options.keyJump,()-> minecraft.player.isUnderWater() ? getAction("legacy.action.swim_up") : null).add((LegacyKeyMapping) Legacy4JClient.keyCrafting).add((LegacyKeyMapping) Minecraft.getInstance().options.keyInventory).add((LegacyKeyMapping) Minecraft.getInstance().options.keyUse,()-> getActualUse(minecraft)).add((LegacyKeyMapping) Minecraft.getInstance().options.keyAttack,()->getMainAction(minecraft));
             renderer.tooltips.addAll(controlTooltips);
             renderer.add((LegacyKeyMapping) minecraft.options.keyShift,()->  minecraft.player.isPassenger() ? getAction(minecraft.player.getVehicle() instanceof LivingEntity ? "legacy.action.dismount" : "legacy.action.exit") : null).add((LegacyKeyMapping) minecraft.options.keyPickItem,()-> getPickAction(minecraft));
         }

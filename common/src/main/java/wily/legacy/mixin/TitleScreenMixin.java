@@ -23,6 +23,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import wily.legacy.Legacy4J;
 import wily.legacy.Legacy4JClient;
 import wily.legacy.client.controller.ControllerManager;
 import wily.legacy.client.screen.*;
@@ -45,17 +46,21 @@ public abstract class TitleScreenMixin extends Screen implements ControlTooltip.
         super(component);
     }
 
+    public ConfirmationScreen createXboxLiveScreen(){
+        return ConfirmationScreen.createInfoScreen(this,Component.literal("Gamer profile not online"), Component.literal("This feature requires a gamer profile which is signed into Xbox LIVE"));
+    }
+
     @Inject(method = "<init>(ZLnet/minecraft/client/gui/components/LogoRenderer;)V", at = @At("RETURN"))
     public void init(boolean bl, LogoRenderer logoRenderer, CallbackInfo ci) {
         minecraft = Minecraft.getInstance();
         if (minecraft.isDemo()) createDemoMenuOptions();
         else this.createNormalMenuOptions();
-        renderableVList.addRenderable(Button.builder(Component.translatable("legacy.menu.mods"), b -> minecraft.setScreen(new ModsScreen(this))).build());
-        renderableVList.addRenderable(Button.builder(Component.translatable("options.language"), b -> minecraft.setScreen(new LegacyLanguageScreen(this, this.minecraft.getLanguageManager()))).build());
+        renderableVList.addRenderable(Button.builder(Component.translatable("legacy.menu.leaderboards"), b -> minecraft.setScreen(this.createXboxLiveScreen())).build());
+        renderableVList.addRenderable(Button.builder(Component.translatable("gui.advancements"), b -> minecraft.setScreen(this.createXboxLiveScreen())).build());
         renderableVList.addRenderable(Button.builder(Component.translatable("menu.options"), b -> minecraft.setScreen(new HelpOptionsScreen(this))).build());
+        renderableVList.addRenderable(Button.builder(Component.translatable("legacy.menu.download_content"), (button) -> minecraft.setScreen(new ModsScreen(this))).build());
         renderableVList.addRenderable(Button.builder(Component.translatable("menu.quit"), (button) -> minecraft.setScreen(new ExitConfirmationScreen(this))).build());
     }
-
 
     @Inject(method = "init", at = @At("HEAD"), cancellable = true)
     protected void init(CallbackInfo ci) {

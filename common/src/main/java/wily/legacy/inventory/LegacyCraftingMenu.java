@@ -38,6 +38,7 @@ public abstract class LegacyCraftingMenu extends AbstractContainerMenu implement
     public static final Component LOOM_TITLE = Component.translatable("container.stonecutter");
     public static final Map<ResourceKey<BannerPattern>,Ingredient> LOOM_PATTERN_EXTRA_INGREDIENT_CACHE = new ConcurrentHashMap<>();
     final BlockPos blockPos;
+    public boolean is2x2 = false;
     public boolean inventoryActive = true;
     public boolean showedNotEnoughIngredientsHint = false;
 
@@ -146,8 +147,8 @@ public abstract class LegacyCraftingMenu extends AbstractContainerMenu implement
     }
     public LegacyCraftingMenu(Inventory inventory, @Nullable MenuType<?> menuType, int i, BlockPos pos) {
         this(menuType, i,pos);
-        addInventorySlotGrid(inventory, 9,186, 133,3);
-        addInventorySlotGrid(inventory, 0,186, 186,1);
+        addInventorySlotGrid(inventory, 9,186, 136,3);
+        addInventorySlotGrid(inventory, 0,186, 189,1);
     }
 
     public static void updateShapedIngredients(List<Ingredient> ingredientsGrid, List<Ingredient> recipeIngredients, int gridDimension, int rcpDimension, int rcpWidth, int rcpHeight){
@@ -167,6 +168,8 @@ public abstract class LegacyCraftingMenu extends AbstractContainerMenu implement
         return patternIng;
     }
 
+    private static final Offset INVENTORY_OFFSET = new Offset(0.5,0.5,0);
+    private static final Offset INVENTORY_2x2_OFFSET = new Offset(-40.5,0.5,0);
 
     public void addInventorySlotGrid(Container container, int startIndex, int x, int y, int rows){
         for (int j = 0; j < rows; j++) {
@@ -183,7 +186,7 @@ public abstract class LegacyCraftingMenu extends AbstractContainerMenu implement
                     }
                 }, new LegacySlotDisplay(){
                     public Offset getOffset() {
-                        return new Offset(0.5,0.5,0);
+                        return is2x2 ? INVENTORY_2x2_OFFSET : INVENTORY_OFFSET;
                     }
                     public int getWidth() {
                         return 16;

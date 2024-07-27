@@ -60,11 +60,8 @@ public class InventoryMenuMixin {
     @ModifyArg(method = "<init>",at = @At(value = "INVOKE",target = "Lnet/minecraft/world/inventory/InventoryMenu;addSlot(Lnet/minecraft/world/inventory/Slot;)Lnet/minecraft/world/inventory/Slot;", ordinal = 5))
     private Slot addSlotSixth(Slot originalSlot){
         return LegacySlotDisplay.override(originalSlot,111, 77,new LegacySlotDisplay(){
-            public Offset getOffset() {
-                return ScreenUtil.hasClassicCrafting() ? Offset.ZERO : EQUIP_SLOT_OFFSET;
-            }
-            public ResourceLocation getIconSprite() {
-                return originalSlot.getItem().isEmpty() ? SHIELD_SLOT : null;
+            public boolean isVisible() {
+                return false;
             }
         });
     }

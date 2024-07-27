@@ -16,6 +16,7 @@ public class ConfirmationScreen extends OverlayPanelScreen{
     protected final MultiLineLabel messageLabel;
     protected Predicate<Button> okAction;
     public Button okButton;
+    protected int messageXOffset;
     protected int messageYOffset;
 
     public ConfirmationScreen(Screen parent, int imageWidth, int imageHeight, Component title, MultiLineLabel messageLabel, Predicate<Button> okAction) {
@@ -23,6 +24,7 @@ public class ConfirmationScreen extends OverlayPanelScreen{
         this.messageLabel = messageLabel;
         this.okAction = okAction;
         this.parent = parent;
+        messageXOffset = 15;
         messageYOffset = title.getString().isEmpty() ? 15 : 35;
     }
     public ConfirmationScreen(Screen parent, int imageWidth, int imageHeight, Component title, Component message, Consumer<Button> okAction) {
@@ -61,6 +63,6 @@ public class ConfirmationScreen extends OverlayPanelScreen{
     public void render(GuiGraphics guiGraphics, int i, int j, float f) {
         super.render(guiGraphics, i, j, f);
         ScreenUtil.renderScrollingString(guiGraphics,font,title,panel.x + 15, panel.y + 15,panel.x + panel.width - 15, panel.y + 26, CommonColor.INVENTORY_GRAY_TEXT.get(),false);
-        messageLabel.renderLeftAlignedNoShadow(guiGraphics,panel.x + 15, panel.y + messageYOffset, 12, CommonColor.INVENTORY_GRAY_TEXT.get());
+        messageLabel.renderLeftAlignedNoShadow(guiGraphics,panel.x + messageXOffset, panel.y + messageYOffset, 12, CommonColor.INVENTORY_GRAY_TEXT.get());
     }
 }

@@ -219,12 +219,13 @@ public abstract class MinecraftMixin {
     }
     @Inject(method = "addInitialScreens", at = @At("HEAD"))
     private void addInitialScreens(List<Function<Runnable, Screen>> list, CallbackInfo ci) {
-        list.add(r-> new ConfirmationScreen(new TitleScreen(),275,130,Component.empty(), Component.translatable("legacy.menu.autoSave_message")){
+        list.add(r-> new ConfirmationScreen(new TitleScreen(),260,148,Component.empty(), Component.translatable("legacy.menu.autoSave_message")){
             protected void initButtons() {
                 panel.y+=25;
+                messageXOffset = 20;
                 messageYOffset = 68;
                 transparentBackground = false;
-                okButton = addRenderableWidget(Button.builder(Component.translatable("gui.ok"), b-> {if (okAction.test(b)) onClose();}).bounds(panel.x + (panel.width - 220) / 2, panel.y + panel.height - 40,220,20).build());
+                okButton = addRenderableWidget(Button.builder(Component.translatable("gui.ok"), b-> {if (okAction.test(b)) onClose();}).bounds(panel.x + (panel.width - 202) / 2, panel.y + panel.height - 39,202,20).build());
             }
 
             @Override
@@ -234,7 +235,7 @@ public abstract class MinecraftMixin {
 
             public void render(GuiGraphics guiGraphics, int i, int j, float f) {
                 super.render(guiGraphics, i, j, f);
-                ScreenUtil.drawAutoSavingIcon(guiGraphics,panel.x + 127, panel.y + 36);
+                ScreenUtil.drawAutoSavingIcon(guiGraphics,panel.x + (panel.width / 2) - 13, panel.y + 31);
             }
         });
     }

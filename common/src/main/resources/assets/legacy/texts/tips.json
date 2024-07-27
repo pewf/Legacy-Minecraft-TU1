@@ -49,7 +49,6 @@
         "legacy.loadingTip.mojangAwards",
         "legacy.loadingTip.creeperPowder",
         "legacy.loadingTip.wolfCreeper",
-        "legacy.loadingTip.mineconParis",
         "legacy.loadingTip.createObsidian",
         "legacy.loadingTip.wolfTail",
         "legacy.loadingTip.mojangOffice",
@@ -62,7 +61,6 @@
         "legacy.loadingTip.minecraftForum",
         "legacy.loadingTip.stackableFences",
         "legacy.loadingTip.unknownMinecon",
-        "legacy.loadingTip.endermanLook",
         "legacy.loadingTip.animalDespawn",
         "legacy.loadingTip.rumors",
         {
@@ -70,13 +68,10 @@
             "screenTime": "0"
         },
         "legacy.loadingTip.animalFollow",
-        "legacy.loadingTip.mineconLondon",
         {
             "translationKey": "legacy.loadingTip.coop",
             "screenTime": "0"
         },
-        "legacy.loadingTip.mineconCalifornia",
-        "legacy.loadingTip.C418",
-        "legacy.loadingTip.lenaRaine"
+        "legacy.loadingTip.C418"
     ]
 }

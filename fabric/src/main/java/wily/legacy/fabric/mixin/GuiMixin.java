@@ -55,30 +55,6 @@ public abstract class GuiMixin {
     @Inject(method = "renderSelectedItemName", at = @At("HEAD"), cancellable = true)
     public void renderSelectedItemName(GuiGraphics guiGraphics, CallbackInfo ci) {
         ci.cancel();
-        if (minecraft.screen != null) return;
-        ScreenUtil.prepareHUDRender(guiGraphics);
-        guiGraphics.pose().translate(0, -ScreenUtil.getHUDSize(),0);
-        this.minecraft.getProfiler().push("selectedItemName");
-        if (this.toolHighlightTimer > 0 && !this.lastToolHighlight.isEmpty()) {
-            List<Component> tooltipLines = this.lastToolHighlight.getTooltipLines(minecraft.player, TooltipFlag.NORMAL).stream().filter(c->!c.getString().isEmpty()).toList();
-            for (int i = 0; i < tooltipLines.size(); i++) {
-                int l;
-                Component mutableComponent = i >= 4 ? MORE : tooltipLines.get(i);
-                int width = this.getFont().width(mutableComponent);
-                int j = (guiGraphics.guiWidth() - width) / 2;
-                int k = guiGraphics.guiHeight() - getFont().lineHeight * (Math.min(4,tooltipLines.size()) - 1 - i);
-                if ((l = (int)((float)this.toolHighlightTimer * 256.0f / 10.0f)) > 255) {
-                    l = 255;
-                }
-                if (l > 0) {
-                    guiGraphics.fill(j - 2, k - 2, j + width + 2, k + this.getFont().lineHeight + 2, this.minecraft.options.getBackgroundColor(0));
-                    guiGraphics.drawString(this.getFont(), mutableComponent, j, k, 0xFFFFFF + (l << 24));
-                }
-                if (i >= 4) break;
-            }
-        }
-        this.minecraft.getProfiler().pop();
-        ScreenUtil.finishHUDRender(guiGraphics);
     }
 
 }
